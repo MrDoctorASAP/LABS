@@ -13,7 +13,17 @@ type
 
 procedure Tast;
 begin
-  
+  Writeln('Лабораторная работа №3.');
+  Writeln('Группа 6113. Лаврентьев Андрей. Вариант 14.');
+  Writeln('Задание');
+  Writeln('В исходном текстовом файле записаны строки, содержашие текст на английском языке.');
+  Writeln('Требуется написать программу, которая для каждой строки исходного файла будет');
+  Writeln('определять и выводить в результирующий файл буквы, встречающиеся в этой строке');
+  Writeln('в порядке уменьшения частоты их встречаемости. Строчные и прописные буквы при этом');
+  Writeln('считаются не различимыми. Каждая буква, которая встречается в тексте, должна быть');
+  Writeln('выведена ровно один раз. Если какие-то буквы встречаются одинаковое колиество раз,');
+  Writeln('то они выводятся в алфавтном порядке. ');
+  Writeln();
 end;
 
 procedure Shell(var freq: arr; var res: chars);
@@ -26,7 +36,7 @@ begin
   for x := 1 to 5 do
   begin
     k := h[x];
-    for c := 'A' to Chr(Ord('Z') - k) do //check z - k
+    for c := 'A' to Chr(Ord('Z') - k) do 
       if freq[c] < freq[Chr(Ord(c)+k)] then begin
         t := res[c];
         res[c] := res[Chr(Ord(c)+k)];
@@ -55,29 +65,22 @@ begin
       freq[c] := 0;
       res[c] := c;
     end;
-    Writeln('1) reading line of file');
     Readln(f1, str);
     for i := 1 to Length(str) do
     begin
-      Writeln('2) Цикл1 i = ',i, 'текущая буква - ', str[i]);
       if UpCase(str[i]) in abc then
         Inc(freq[UpCase(str[i])]);
     end;
-    Writeln('4)Сортировка шелла ');
     Shell(freq, res);
-    Writeln('5) Начало строки в файл записи в файл');
     c:= 'A';
     while (( c <= 'Z') and (freq[c] <> 0)) do begin
-      Writeln('6) Выполнение записи буквы ', c, ' в файл');
       Write(f2, res[c]); 
       Inc(c);
     end;
     Writeln(f2, '');
-    Writeln('7) Конец записи строки в файл');
   end;
   Close(f1);
   Close(f2);
-  Writeln('8) Конец алгоритма');
 end;
 
 var
@@ -86,7 +89,6 @@ var
 
 begin
   clrscr;
-  Writeln(' ' in abc);
   Tast;
   Writeln('Введите имя исходного файла: ');
   Readln(fn1);
