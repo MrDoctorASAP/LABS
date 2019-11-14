@@ -1,7 +1,5 @@
 ﻿uses crt;
 
-//написать task и убрать writeln
-
 const
   abc = ['A'..'Z'];
 
