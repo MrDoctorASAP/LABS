@@ -20,10 +20,12 @@ begin
   Writeln('Task...')
 end;
 
-procedure PrintFileRecord(f : FileRecord);
+procedure PrintFileRecord(fn : string);
 var stud : Student;
 i : integer;
+f : FileRecord;
 begin
+  if FileExists(fn) then begin
   Reset(f);
   Writeln('               Имя          Фаммилия   Класс                      Олимпиады');
   Writeln('                                                           Предмет   Баллы   Место');
@@ -41,108 +43,8 @@ begin
     Writeln;
   end;  
   Close(f);
+end else Writeln('Файл не существует');
 end;
-
-procedure DenerateFileRecord;
-var 
-fn : string;
-f, f2 : FileRecord;
-stud, hj : Student;
-s,h : string;
-code, i, n, p : integer;
-begin
-  Write('Filename : ');
-  Readln(fn);
-  Assign(f, fn);
-  Rewrite(f);
-  Assign(f2, 'database2');
-  
-  Write('Count : ');
-  Readln(s);
-  Reset(f2);
-  Val(s, n, code);
-  while not (Eof(f2)) and (FilePos(f2) < n) do begin
-    for i := 1 to 5 do 
-      stud.olympiads[i].subject := '';
-    Read(f2, hj);
-    Writeln(hj.name,' ', hj.surname);
-    stud.name := hj.name; stud.surname := hj.surname; stud.classStud := hj.classStud;
-    for i := 1 to 5 do begin
-      if hj.olympiads[i].subject = '' then break;
-      Writeln('  ',hj.olympiads[i].subject);
-      stud.olympiads[i].subject := hj.olympiads[i].subject;
-      Write('Point : '); Readln(s);
-      Val(s, stud.olympiads[i].points, code);
-      Write('Place : '); Readln(s);
-      Val(s, stud.olympiads[i].place, code);
-    end;
-    Write(f, stud);
-  end;
-  Close(f); Close(f2);
-end;
-
-procedure InputFileRecord;
-var 
-fn : string;
-f : FileRecord;
-stud : Student;
-s : string;
-code, i, n, p : integer;
-begin
-  Write('Filename : ');
-  Readln(fn);
-  Assign(f, fn);
-  Rewrite(f);
-  Write('Name: ');
-  Readln(s);
-  while s <> '0' do begin
-    for i := 1 to 5 do 
-      stud.olympiads[i].subject := '';
-    n := 0;
-    code := 0;
-    i := 0;
-    stud.name := s;
-    
-    Write('Surname : ');
-    Readln(s);
-    stud.surname := s;
-    
-    Write('Class : ');
-    Readln(s);
-    stud.classStud := s;
-    
-    Write('Count of olympiad (<= 5) : ');
-    Readln(s);
-    Val(s, n, code);
-    if (code = 0) and (n <= 5) then
-      for i := 1 to n do begin
-        Write('   subject : ');
-        Readln(s);
-        stud.olympiads[i].subject := s;
-        
-        Write('   points : ');
-        Readln(s);
-        p := 0;
-        Val(s, p, code);
-        stud.olympiads[i].points := p;
-        
-        Write('   place : ');
-        Readln(s);
-        p := 0;
-        Val(s, p, code);
-        stud.olympiads[i].place := p;
-      end;
-    
-    Write(f, stud);
-    
-    Write('Name: ');
-    Readln(s);
-    
-      
-  end;
-  Close(f);
-end;
-
 procedure Alg(var f1 : FileRecord; var f2 : FileRecord; var f3: Text; subject: string);
 var stud : Student;
 i, c: integer;
@@ -185,8 +87,7 @@ end;
 var
 f1, f2: FileRecord;
 f3 : Text;
-
-sub, fn : string;
+sub, s : string;
 begin
   //DenerateFileRecord;
   //inputFileRecord;
@@ -196,7 +97,7 @@ begin
   Assign(f3, 'result.txt');
   Alg(f1, f2, f3, sub);
   printFileRecord(f2);{}
-  Task;
+  {Task;
   
   Write('Введите имя исходного файла : '); Readln(fn);
   if FileExists(fn) then begin
@@ -214,4 +115,21 @@ begin
   end else 
     Writeln('');
   {}
+  
+  Write('Лабораторная работа № 4. Выполнил Лаврентьев, 6113. 14 Вариант.');
+  Write('Выберете действие : ');
+  Write('1) Просмотр задания.');
+  Write('2) Просмотреть файл записи.')
+  Write('3) Редактировать файл записи.')
+  Write('4) Получить новый файл записи и текстовый файл.')
+  Write('5) Выход');
+  Readln(s);
+  while s <> '5' do begin
+    case s of
+      1:Task; 
+      2:
+      3:
+      4:
+    end;
+  end;
 end.
