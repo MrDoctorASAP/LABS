@@ -30,28 +30,12 @@ begin
   Writeln;
   while not Eof(f) do begin
     Read(f, stud);
-    y := WhereY; 
+    Write(stud.name:18, stud.surname:18, stud.classStud:5);
     i := 1;
-    Write(' ',stud.name);
-    GotoXY(18, y);
-    Write(stud.surname);
-    GotoXY(34, y);
-    Write(stud.classStud);
-    GotoXY(0, y);
-    while (i <= 5) and (stud.olympiads[i].subject <> '') do begin
-      y := WhereY;
-      GotoXY(41, y);
-      Write(stud.olympiads[i].subject);
-      GotoXY(60, y);
-      Write(stud.olympiads[i].points);
-      GotoXY(67, y);
-      Write(stud.olympiads[i].place);
-      i := i+1;
-      Writeln;
+    while stud.olympiads[i] <> '' do begin
+      Writeln(stud.olympiads[i].subject:22, stud.olympiads[i].points:7, stud.olympiads[i].place:7);
     end;
-    Writeln;
-    Writeln;
-  end;
+  end;  
   Close(f);
 end;
 
